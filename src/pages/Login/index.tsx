@@ -10,10 +10,10 @@ interface ILogin {
     email: string,
     password: string
 }
-const usuarioEntra = {
-    "Email": "jonjonlocao@gmail.com",
-    "password": "jonlindo1234"
-}
+// const usuarioEntra = {
+//     "Email": "jonjonlocao@gmail.com",
+//     "password": "jonlindo1234"
+// }
 
 export default function Login() {
     const { handleSubmit, register} = useForm<ILogin>();
@@ -53,12 +53,16 @@ export default function Login() {
                     <Segment stacked>
                         <Form.Field>
                             <div className="ui fluid left icon input">
-                                <input ref={register} value={usuarioEntra.Email} name="email" placeholder="E-mail address" required type="text" />
+                                <input ref={register} 
+                                // value={usuarioEntra.Email}
+                                 name="email" placeholder="E-mail address" required type="text" />
                             </div>
                         </Form.Field>
                         <Form.Field>
                             <div className="ui fluid left icon input">
-                                <input ref={register} value={usuarioEntra.password} name="password" placeholder='Password' required type='password' />
+                                <input ref={register} 
+                                // value={usuarioEntra.password}
+                                 name="password" placeholder='Password' required type='password' />
                             </div>
                         </Form.Field>
                         <Button
