@@ -1,7 +1,7 @@
 import React from 'react';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-const API_URL = "http://api-rfid-dev.herokuapp.com/v1"
+const API_URL = "https://api-rfid.herokuapp.com/v1"
 
 export const handleResponseSuccess = async (response: { data: any; }) => {
     return response.data;
