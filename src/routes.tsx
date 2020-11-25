@@ -7,7 +7,7 @@ import { Button, Container, Tab } from 'semantic-ui-react'
 import Login from './pages/Login'
 import Tags from './pages/Tags';
 import Ativos from './pages/Ativos';
-import Inventario from './pages/Inventario';
+import Departamento from './pages/Departamento';
 
 // export default function Routes() {
 //   return (
@@ -35,12 +35,12 @@ const panes = [
   },
   {
     menuItem: 'Departamento',
-    render: () => <Tab.Pane >Tab 3 Content</Tab.Pane>
+    render: () => <Tab.Pane as={Departamento}/>
   },
-  {
-    menuItem: 'Histórico',
-    render: () => <Tab.Pane >Tab 2 Content</Tab.Pane>
-  },
+  // {
+  //   menuItem: 'Histórico',
+  //   render: () => <Tab.Pane >Tab 2 Content</Tab.Pane>
+  // },
   // {
   //   menuItem: 'Inventário',
   //   render: () => <Tab.Pane as={Inventario} />

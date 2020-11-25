@@ -42,6 +42,15 @@ const Requests = {
         getAll: () => {
             return AxiosApi.get("/departament")
         },
+        cadastrar: (sigla: string,
+            nome: string,
+            descricao: string) => {
+            return AxiosApi.post("/departament",{
+                sigla,
+                nome,
+                descricao
+            })
+        },
     },
     categoriaAtivos: {
         getAll: () => {
