@@ -12,3 +12,17 @@ body {
 body, input, button, textarea {
   font: 600 18px Nunito, sans-serif;
 }
+
+.flex-end{
+  display: flex;
+  flex-direction: row-reverse;
+}
+.smallMarginTop{
+  margin-top: 20px;
+}
+.smallPaddingTop{
+  padding-top: 20px;
+}
+.smallMarginBottom{
+  margin-bottom: 20px;
+}

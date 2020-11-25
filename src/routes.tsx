@@ -1,21 +1,64 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import React from 'react'
+import { useSelector } from 'react-redux';
+import { Button, Container, Tab } from 'semantic-ui-react'
 
-import CreateOrphanage from './pages/CreateOrphanage';
-import Landing from './pages/Landing';
-import Orphanage from './pages/Orphanage';
-import OrphanagesMap from './pages/OrphanagesMap';
+
+// import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Login from './pages/Login'
+import Tags from './pages/Tags';
+import Ativos from './pages/Ativos';
+import Inventario from './pages/Inventario';
+
+// export default function Routes() {
+//   return (
+//     <BrowserRouter>
+//       <Switch>
+//         <Route path="/tags" exact component={Tab} />
+//         <Route path="/ativos" component={Tab} />
+//         <Route path="/departamento" component={Tab} />
+//         <Route path="/historico" component={Tab} />
+//         <Route path="/inventario" component={Tab} />
+//       </Switch>
+//     </BrowserRouter>
+//   );
+// }
+
+
+const panes = [
+  {
+    menuItem: 'Tags',
+    render: () => <Tab.Pane as={Tags} />
+  },
+  {
+    menuItem: 'Ativos',
+    render: () => <Tab.Pane as={Ativos} />
+  },
+  {
+    menuItem: 'Departamento',
+    render: () => <Tab.Pane >Tab 3 Content</Tab.Pane>
+  },
+  {
+    menuItem: 'Histórico',
+    render: () => <Tab.Pane >Tab 2 Content</Tab.Pane>
+  },
+  {
+    menuItem: 'Inventário',
+    render: () => <Tab.Pane as={Inventario} />
+  },
+
+
+]
 
 export default function Routes() {
+  const token = useSelector((state: any) => state.system.token)
+  if (!token) {
+    return <Login />
+  }
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/tags" exact component={Landing} />
-        <Route path="/ativos" component={OrphanagesMap} />
-        <Route path="/departamento" component={CreateOrphanage} />
-        <Route path="/historico" component={Orphanage} />
-        <Route path="/inventario" component={Orphanage} />
-      </Switch>
-    </BrowserRouter>
+    <Container className="smallMarginTop">
+      <Button content='Ler RFID' primary floated="right" />
+      <Tab className="smallMarginTop" panes={panes} />
+    </Container>
   );
 }
+
