@@ -1,4 +1,14 @@
 import AxiosApi from './AxiosApi';
+import queryString from "query-string";
+
+const stringifyQueryString = (obj: any) => {
+    const keys = Object.keys(obj).filter(
+        (key) => obj[key] !== "" && obj[key] !== " "
+    );
+    const retorno: any = {};
+    keys.forEach((key) => (retorno[key] = obj[key]));
+    return queryString.stringify(retorno);
+};
 
 
 const Requests = {
@@ -7,18 +17,21 @@ const Requests = {
     },
     tags: {
         cadastrar: (epc: string, tipo: string) => {
-            return AxiosApi.post("/api/tag", { epc, tipo })
+            return AxiosApi.post("/tag", { epc, tipo })
         },
         getAll: () => {
-            return AxiosApi.get("/api/tag")
+            return AxiosApi.get("/tag")
         }
     },
     ativos: {
         getAll: () => {
-            return AxiosApi.get("/api/active")
+            return AxiosApi.get("/active")
+        },
+        getAtivosFromDepartament: (departament: string) => {
+            return AxiosApi.get(`/active/departament/${departament}`)
         },
         cadastrar: (numeroPatrimonio: string, activeCategoryId: string, tagId: string, marca: string, modelo: string, dataAquisicao: Date, dataFinalGarantia: Date, departamentId: string) => {
-            return AxiosApi.post("/api/active",
+            return AxiosApi.post("/active",
                 {
                     numeroPatrimonio, activeCategoryId, tagId, marca, modelo, dataAquisicao, dataFinalGarantia, departamentId
                 }
@@ -27,12 +40,12 @@ const Requests = {
     },
     departamento: {
         getAll: () => {
-            return AxiosApi.get("/api/departament")
+            return AxiosApi.get("/departament")
         },
     },
     categoriaAtivos: {
         getAll: () => {
-            return AxiosApi.get("/api/active-category")
+            return AxiosApi.get("/active-category")
         },
     }
 }

@@ -41,10 +41,10 @@ const panes = [
     menuItem: 'Histórico',
     render: () => <Tab.Pane >Tab 2 Content</Tab.Pane>
   },
-  {
-    menuItem: 'Inventário',
-    render: () => <Tab.Pane as={Inventario} />
-  },
+  // {
+  //   menuItem: 'Inventário',
+  //   render: () => <Tab.Pane as={Inventario} />
+  // },
 
 
 ]

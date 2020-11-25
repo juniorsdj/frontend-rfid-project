@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Dropdown, Form, Input, Modal, Select, Table } from 'semantic-ui-react';
+import { Button, Dropdown, Form, Input, Modal, Select, Table, Container } from 'semantic-ui-react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { format } from 'date-fns'
@@ -16,6 +16,7 @@ import { SelectField } from '../../components/form/FormFields';
 export default function Tags() {
     const { handleSubmit, register, setValue } = useForm();
     const [isLoading, setIsLoading] = useState(false)
+    const [departamentSearch, setDepartamentSearch] = useState("")
 
     const [modalIsOpened, setModalIsOpened] = useState(false)
     const [listaAtivos, setListaAtivos] = useState([])
@@ -36,6 +37,41 @@ export default function Tags() {
             .catch(err => {
                 setIsLoading(false);
             })
+
+
+
+    };
+    const searchByFilter = async () => {
+        // data = ativoParaCadastrar[0]
+        if (departamentSearch.trim() === "") {
+            return Requests.ativos.getAll()
+                .then((r: any) => {
+                    if (r.r) {
+                        setIsLoading(false);
+                        setListaAtivos(r.data)
+                    }
+                })
+                .catch(
+                    err => {
+                        setIsLoading(false);
+                        console.log(err)
+                    }
+                )
+        }
+
+        setIsLoading(true);
+        Requests.ativos.getAtivosFromDepartament(departamentSearch).then((r: any) => {
+            if (r.r) {
+                setListaAtivos(r.data)
+                setIsLoading(false);
+            }
+        })
+            .catch(
+                err => {
+                    setIsLoading(false);
+                    console.log(err)
+                }
+            )
 
 
 
@@ -119,6 +155,26 @@ export default function Tags() {
             <div className="flex-end">
                 <Button className="smallMarginBottom" content='Cadastrar Ativo' primary onClick={() => setModalIsOpened(true)} />
             </div>
+
+            <Container className="smallMarginTop">
+                <Form.Field
+                    control={Input}
+                    label='Departamento'
+                    placeholder='101'
+                    value={departamentSearch}
+                    disabled={isLoading}
+                    onChange={(ev: any, { value }: { value: string }) => setDepartamentSearch(value)}
+                />
+                <div className="flex-end">
+                    <Button
+                        color='black'
+                        onClick={() => searchByFilter()}
+                        disabled={isLoading}
+                    >
+                        Buscar
+                      </Button>
+                </div>
+            </Container>
 
             <Table celled className="smallMarginTop" >
                 <Table.Header>
