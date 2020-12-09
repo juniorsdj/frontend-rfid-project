@@ -61,6 +61,14 @@ const Requests = {
         getLastEpc: () => {
             return AxiosApi.get("/tag/epc")
         }, 
+    },
+    historico: {
+        getAllHistorico: () => {
+            return AxiosApi.get("/history")
+        }, 
+        getHistoricoByActiveId: (activeId: string) => {
+            return AxiosApi.get(`/history/active/${activeId}`)
+        }, 
     }
 }
 

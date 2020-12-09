@@ -8,6 +8,7 @@ import Login from './pages/Login'
 import Tags from './pages/Tags';
 import Ativos from './pages/Ativos';
 import Departamento from './pages/Departamento';
+import Historico from './pages/Historico';
 
 // export default function Routes() {
 //   return (
@@ -37,10 +38,10 @@ const panes = [
     menuItem: 'Departamento',
     render: () => <Tab.Pane as={Departamento}/>
   },
-  // {
-  //   menuItem: 'Histórico',
-  //   render: () => <Tab.Pane >Tab 2 Content</Tab.Pane>
-  // },
+  {
+    menuItem: 'Histórico',
+    render: () => <Tab.Pane as={Historico}/>
+  },
   // {
   //   menuItem: 'Inventário',
   //   render: () => <Tab.Pane as={Inventario} />
@@ -56,7 +57,7 @@ export default function Routes() {
   }
   return (
     <Container className="smallMarginTop">
-      <Button content='Ler RFID' primary floated="right" />
+      {/* <Button content='Ler RFID' primary floated="right" /> */}
       <Tab className="smallMarginTop" panes={panes} />
     </Container>
   );
