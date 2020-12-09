@@ -56,7 +56,13 @@ const Requests = {
         getAll: () => {
             return AxiosApi.get("/active-category")
         },
+    },
+    epc: {
+        getLastEpc: () => {
+            return AxiosApi.get("/tag/epc")
+        }, 
     }
 }
+
 
 export default Requests

@@ -33,6 +33,22 @@ export default function Tags() {
     const [listaTags, setListaTags] = useState([])
 
 
+    const getLastEpc = async () => {
+        setIsLoading(true)
+        Requests.epc.getLastEpc()
+            .then(r => {
+                if (r.data) {
+                    setEpc(r.data.epcValue)
+                    setIsLoading(false)
+                }
+
+            })
+            .catch(err => {
+                setIsLoading(false)
+            }
+            )
+
+    }
     const cadastrarTag = async () => {
         setIsLoading(true)
 
@@ -106,14 +122,25 @@ export default function Tags() {
                         <Modal.Header>Cadastro de TAGS</Modal.Header>
                         <Modal.Content>
                             <Form>
-                                <Form.Field
-                                    control={Input}
-                                    label='Eletronic Product Code'
-                                    placeholder='4184XA841Z'
-                                    value={epc}
-                                    disabled={isLoading}
-                                    onChange={(ev: any, { value }: { value: string }) => setEpc(value)}
-                                />
+                                {
+                                    epc ? (
+                                        <Form.Field
+                                            control={Input}
+                                            label='Eletronic Product Code'
+                                            value={epc}
+                                            readOnly
+                                            disabled={isLoading}
+                                        />
+                                    ) : (
+                                        <Button
+                                        onClick={() => getLastEpc()}
+                                        disabled={isLoading}
+                                    >
+                                        Ler RPC
+                              </Button>
+                                    )
+                                }
+
                                 <Form.Field
                                     control={Select}
                                     label='Tipo da Tag'

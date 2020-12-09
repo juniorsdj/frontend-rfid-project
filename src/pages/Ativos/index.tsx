@@ -41,9 +41,14 @@ export default function Tags() {
 
 
     };
-    const searchByFilter = async () => {
+
+
+
+    const searchByFilter = async (filter: any) => {
         // data = ativoParaCadastrar[0]
-        if (departamentSearch.trim() === "") {
+        setDepartamentSearch(String(filter))
+
+        if (filter.trim() === "") {
             return Requests.ativos.getAll()
                 .then((r: any) => {
                     if (r.r) {
@@ -60,7 +65,7 @@ export default function Tags() {
         }
 
         setIsLoading(true);
-        Requests.ativos.getAtivosFromDepartament(departamentSearch).then((r: any) => {
+        Requests.ativos.getAtivosFromDepartament(filter).then((r: any) => {
             if (r.r) {
                 setListaAtivos(r.data)
                 setIsLoading(false);
@@ -157,15 +162,21 @@ export default function Tags() {
             </div>
 
             <Container className="smallMarginTop">
-                <Form.Field
-                    control={Input}
+                <Dropdown
                     label='Departamento'
-                    placeholder='101'
+                    placeholder='Escolha o departamento'
+                    selection
+                    options={departamentoOptions}
                     value={departamentSearch}
-                    disabled={isLoading}
-                    onChange={(ev: any, { value }: { value: string }) => setDepartamentSearch(value)}
+                    onChange={(ev, {value}) => { searchByFilter(value)}}
+                    
                 />
-                <div className="flex-end">
+                    
+                {/* // value={departamentSearch}
+                // options={departamentoOptions}
+                // disabled={isLoading}
+                onChange={(ev: any, { value }: { value: string }) => setDepartamentSearch(value)} */}
+                {/* <div className="flex-end">
                     <Button
                         color='black'
                         onClick={() => searchByFilter()}
@@ -173,7 +184,7 @@ export default function Tags() {
                     >
                         Buscar
                       </Button>
-                </div>
+                </div> */}
             </Container>
 
             <Table celled className="smallMarginTop" >
