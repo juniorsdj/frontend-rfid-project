@@ -136,7 +136,7 @@ export default function Tags() {
                                         onClick={() => getLastEpc()}
                                         disabled={isLoading}
                                     >
-                                        Ler RPC
+                                        Ler EPC
                               </Button>
                                     )
                                 }
